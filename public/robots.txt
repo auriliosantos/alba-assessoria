@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.legalizeseudiploma.com.br/sitemap.xml
