@@ -1,10 +1,6 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-
 export default function Cases() {
   return (
     <>
-      <Navbar />
       <main style={{ padding: '2rem' }}>
         <h1>Cases de Sucesso</h1>
         <p>Veja alguns exemplos de pessoas que legalizaram seus diplomas conosco:</p>
@@ -14,7 +10,6 @@ export default function Cases() {
           <li>Maria Oliveira (Direito - Argentina para Brasil)</li>
         </ul>
       </main>
-      <Footer />
     </>
   );
 }

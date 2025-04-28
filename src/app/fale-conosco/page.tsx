@@ -1,5 +1,4 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+'use client';
 import styled from 'styled-components';
 
 const ContactButton = styled.a`
@@ -21,7 +20,6 @@ const ContactButton = styled.a`
 export default function FaleConosco() {
   return (
     <>
-      <Navbar />
       <main style={{ padding: '2rem', textAlign: 'center' }}>
         <h1>Fale com um Especialista</h1>
         <p>Estamos prontos para tirar suas dúvidas e iniciar seu processo de legalização!</p>
@@ -29,7 +27,6 @@ export default function FaleConosco() {
           WhatsApp: (81) 99567-0475
         </ContactButton>
       </main>
-      <Footer />
     </>
   );
 }

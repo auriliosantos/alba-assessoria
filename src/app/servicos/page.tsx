@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 export default function Servicos() {
   return (
     <>
-      <Navbar />
       <main style={{ padding: '2rem' }}>
         <h1>Serviços</h1>
         <ul style={{ marginTop: '1rem', listStyle: 'disc', paddingLeft: '2rem' }}>
@@ -14,7 +13,6 @@ export default function Servicos() {
           <li>Assessoria em processos junto ao MEC e universidades públicas.</li>
         </ul>
       </main>
-      <Footer />
     </>
   );
 }

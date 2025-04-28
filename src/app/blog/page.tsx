@@ -1,27 +1,39 @@
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+// src/app/blog/page.tsx
+
+import fs from 'fs';
+import path from 'path';
 import Link from 'next/link';
 
-const posts = [
-  { title: 'Como funciona o reconhecimento de diplomas estrangeiros no Brasil', slug: 'reconhecimento-diplomas' },
-  { title: 'Documentos necessários para validar seu diploma', slug: 'documentos-necessarios' }
-];
+const PostsPage = async () => {
+  // Caminho para a pasta de posts
+  const postsDirectory = path.join(process.cwd(), 'content/posts');
+  
+  // Lê os arquivos da pasta
+  const filenames = fs.readdirSync(postsDirectory);
+  
+  // Cria links dinâmicos para cada post
+  const posts = filenames.map((filename) => {
+    const slug = filename.replace(/\.md$/, ''); // Remove a extensão .md para o slug
+    return {
+      slug,
+      title: slug.replace('-', ' ').toUpperCase(), // Você pode alterar isso conforme necessário para o título
+    };
+  });
 
-export default function Blog() {
   return (
-    <>
-      <Navbar />
-      <main style={{ padding: '2rem' }}>
-        <h1>Blog</h1>
-        <ul style={{ marginTop: '1rem' }}>
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </main>
-      <Footer />
-    </>
+    <div>
+      <h1>Posts</h1>
+      <ul>
+        {posts.map(({ slug, title }) => (
+          <li key={slug}>
+            <Link href={`/blog/${slug}`}>
+              {title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-}
+};
+
+export default PostsPage;

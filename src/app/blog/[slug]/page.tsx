@@ -1,31 +1,32 @@
+// src/app/blog/[slug]/page.tsx
+
+import fs from 'fs';
+import path from 'path';
 import { notFound } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
-const posts = {
-  'reconhecimento-diplomas': {
-    title: 'Como funciona o reconhecimento de diplomas estrangeiros no Brasil',
-    content: `O reconhecimento de diplomas estrangeiros é feito por universidades públicas, conforme regulamentação do MEC...`
-  },
-  'documentos-necessarios': {
-    title: 'Documentos necessários para validar seu diploma',
-    content: `Você precisará de: diploma original, histórico escolar, traduções juramentadas e comprovante de carga horária...`
+const PostPage = async ({ params }) => {
+  const { slug } = params;  // Pegando o slug da URL
+
+  // Caminho para a pasta de posts
+  const postsDirectory = path.join(process.cwd(), 'content/posts');
+  const postPath = path.join(postsDirectory, `${slug}.md`);
+  
+  // Verifica se o arquivo existe
+  if (!fs.existsSync(postPath)) {
+    notFound();  // Retorna 404 se o arquivo não for encontrado
   }
-};
 
-export default function Post({ params }: { params: { slug: string } }) {
-  const post = posts[params.slug];
-
-  if (!post) return notFound();
+  // Lê o conteúdo do post
+  const postContent = fs.readFileSync(postPath, 'utf-8');
 
   return (
-    <>
-      <Navbar />
-      <main style={{ padding: '2rem' }}>
-        <h1>{post.title}</h1>
-        <p style={{ marginTop: '1rem' }}>{post.content}</p>
-      </main>
-      <Footer />
-    </>
+    <div>
+      <h1>{slug.replace('-', ' ').toUpperCase()}</h1>
+      <div>
+        <pre>{postContent}</pre> {/* Aqui você pode processar o markdown */}
+      </div>
+    </div>
   );
-}
+};
+
+export default PostPage;
